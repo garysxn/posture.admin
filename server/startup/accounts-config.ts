@@ -25,7 +25,7 @@ Accounts.onCreateUser(function(options, user) {
 // Accounts.removeDefaultRateLimit();
 
 // validate user role before login
-Accounts.validateLoginAttempt(function (options) {
+/*Accounts.validateLoginAttempt(function (options) {
    if (options.user && options.allowed) {
        var isAdmin = Roles.userIsInRole(options.user, ['super-admin'])
        if (!isAdmin) {
@@ -33,4 +33,4 @@ Accounts.validateLoginAttempt(function (options) {
        }
    }
    return true;
-});
+});*/

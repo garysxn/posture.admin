@@ -1,0 +1,125 @@
+<div class="row" >
+    <h2 class="header red-text text-lighten-1" color="primary">
+      <span *ngIf="!packageId">Create new Package</span>
+      <span *ngIf="!!packageId">Update Package</span>
+    </h2>
+
+    <div class="row">
+      <form class="col s12" [formGroup]="packageForm" #f="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="input-field col s12">
+            <input formControlName="title" id="title" type="text" [ngClass]="{'invalid':packageForm.controls['title'].touched && !packageForm.controls['title'].valid}"></input>
+            <label for="title" style="transform: translateY(-140%);">Title</label>
+            <div *ngIf="packageForm.controls['title'].errors && packageForm.controls['title'].touched" class="error">
+                <div [hidden]="!packageForm.controls['title'].errors.required">Title is required.</div>
+                <div [hidden]="!packageForm.controls['title'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!packageForm.controls['title'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['title'].errors.validateFirstName">Please type valid Title.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="code" id="code" type="text" [ngClass]="{'invalid':packageForm.controls['code'].touched && !packageForm.controls['code'].valid}"></input>
+            <label for="code" style="transform: translateY(-140%);">Code</label>
+            <div *ngIf="packageForm.controls['code'].errors && packageForm.controls['code'].touched" class="error">
+                <div [hidden]="!packageForm.controls['code'].errors.required">Code is required.</div>
+                <div [hidden]="!packageForm.controls['code'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!packageForm.controls['code'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['code'].errors.validateSlug">Only alphanumeric characters allowed.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <textarea formControlName="summary" id="summary" style="height:8rem;" [ngClass]="{'invalid':packageForm.controls['summary'].touched && !packageForm.controls['summary'].valid}"></textarea>
+            <label for="summary" style="transform: translateY(-140%);">Summary</label>
+            <div *ngIf="packageForm.controls['summary'].errors && packageForm.controls['summary'].touched" class="error">
+                <div [hidden]="!packageForm.controls['summary'].errors.required">Summary is required.</div>
+                <div [hidden]="!packageForm.controls['summary'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!packageForm.controls['summary'].errors.maxlength">Max 255 characters allowed.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input min="1" max="25" formControlName="maxDevices" id="maxDevices" type="number" [ngClass]="{'invalid':packageForm.controls['maxDevices'].touched && !packageForm.controls['maxDevices'].valid}"></input>
+            <label for="maxDevices" style="transform: translateY(-140%);">Maximum Devices</label>
+            <div *ngIf="packageForm.controls['maxDevices'].errors && packageForm.controls['maxDevices'].touched" class="error">
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.required">This value is required.</div>
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.minlength">Min 1 character required.</div>
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.maxlength">Max 3 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.pattern">Only number (1-25) is allowed.</div>
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.validateMinVal">Min figure required is 1.</div>
+                <div [hidden]="!packageForm.controls['maxDevices'].errors.validateMaxVal">Max figure allowed is 25.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input min="1" max="50" formControlName="maxPatients" id="maxPatients" type="number" [ngClass]="{'invalid':packageForm.controls['maxPatients'].touched && !packageForm.controls['maxPatients'].valid}"></input>
+            <label for="maxPatients" style="transform: translateY(-140%);">Maximum Patients</label>
+            <div *ngIf="packageForm.controls['maxPatients'].errors && packageForm.controls['maxPatients'].touched" class="error">
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.required">This value is required.</div>
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.minlength">Min 1 character required.</div>
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.maxlength">Max 3 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.pattern">Only number (1-50) is allowed.</div>
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.validateMinVal">Min figure required is 1.</div>
+                <div [hidden]="!packageForm.controls['maxPatients'].errors.validateMaxVal">Max figure allowed is 50.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input min="0.25" max="10" step="0.25" formControlName="pricePerPatient" id="pricePerPatient" type="number"  [ngClass]="{'invalid':packageForm.controls['pricePerPatient'].touched && !packageForm.controls['pricePerPatient'].valid}"></input>
+            <label for="pricePerPatient" style="transform: translateY(-140%);">Price per Patient</label>
+            <div *ngIf="packageForm.controls['pricePerPatient'].errors && packageForm.controls['pricePerPatient'].touched" class="error">
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.required">This value is required.</div>
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.minlength">Min 1 character required.</div>
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.maxlength">Max 3 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.pattern">Only number (0.25-10) is allowed.</div>
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.validateMinVal">Min figure required is 0.25.</div>
+                <div [hidden]="!packageForm.controls['pricePerPatient'].errors.validateMaxVal">Max figure allowed is 10.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input min="25" max="500" formControlName="pricePerDevice" id="pricePerDevice" type="number" [ngClass]="{'invalid':packageForm.controls['pricePerDevice'].touched && !packageForm.controls['pricePerDevice'].valid}"></input>
+            <label for="pricePerDevice" style="transform: translateY(-140%);">Price per Device</label>
+            <div *ngIf="packageForm.controls['pricePerDevice'].errors && packageForm.controls['pricePerDevice'].touched" class="error">
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.required">This value is required.</div>
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.minlength">Min 1 character required.</div>
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.maxlength">Max 3 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.pattern">Only number (25-500) is allowed.</div>
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.validateMinVal">Min figure required is 25.</div>
+                <div [hidden]="!packageForm.controls['pricePerDevice'].errors.validateMaxVal">Max figure allowed is 500.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input min="1" max="36" formControlName="durationInMonths" id="durationInMonths" type="number" [ngClass]="{'invalid':packageForm.controls['pricePerDevice'].touched && !packageForm.controls['durationInMonths'].valid}"></input>
+            <label for="durationInMonths" style="transform: translateY(-140%);">Duration (In months)</label>
+            <div *ngIf="packageForm.controls['durationInMonths'].errors && packageForm.controls['durationInMonths'].touched" class="error">
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.required">This value is required.</div>
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.minlength">Min 1 character required.</div>
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.maxlength">Max 3 characters allowed.</div>
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.pattern">Only number (1-36) is allowed.</div>
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.validateMinVal">Min figure required is 1.</div>
+                <div [hidden]="!packageForm.controls['durationInMonths'].errors.validateMaxVal">Max figure allowed is 36.</div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!packageForm.valid">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light grey lighten-2" type="submit" name="action" [routerLink]="['/package/list']">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div [hidden]="error == ''">
+        <p class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+          <p class="md-body-1">{{ error }}</p>
+        </p>
+      </div>
+
+    </div>
+</div>

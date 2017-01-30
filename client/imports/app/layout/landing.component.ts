@@ -13,6 +13,8 @@ export class LandingComponent implements OnInit {
     constructor(private router: Router) {
         if(Meteor.userId()){
             this.router.navigate(['/dashboard']);
+        } else {
+            this.router.navigate(['/login']);
         }
     }
 
