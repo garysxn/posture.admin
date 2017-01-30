@@ -1,0 +1,67 @@
+<div class="row" >
+    <h2 class="header red-text text-lighten-1" color="primary">
+      <span *ngIf="!emailId">Create new Email</span>
+      <span *ngIf="!!emailId">Update Email</span>
+    </h2>
+
+    <div class="row">
+      <form class="col s12" [formGroup]="emailForm" #f="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="input-field col s12">
+            <input formControlName="title" id="title" type="text" [ngClass]="{'invalid':emailForm.controls['title'].touched && !emailForm.controls['title'].valid}"></input>
+            <label for="title" style="transform: translateY(-140%);">Title</label>
+            <div *ngIf="emailForm.controls['title'].errors && emailForm.controls['title'].touched" class="error">
+                <div [hidden]="!emailForm.controls['title'].errors.required">Title is required.</div>
+                <div [hidden]="!emailForm.controls['title'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!emailForm.controls['title'].errors.maxlength">Max 255 characters allowed.</div>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <input formControlName="heading" id="heading" type="text" [ngClass]="{'invalid':emailForm.controls['heading'].touched && !emailForm.controls['heading'].valid}"></input>
+            <label for="heading" style="transform: translateY(-140%);">Heading</label>
+            <div *ngIf="emailForm.controls['heading'].errors && emailForm.controls['heading'].touched" class="error">
+                <div [hidden]="!emailForm.controls['heading'].errors.required">Heading is required.</div>
+                <div [hidden]="!emailForm.controls['heading'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!emailForm.controls['heading'].errors.maxlength">Max 255 characters allowed.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <textarea formControlName="summary" id="summary" style="height:8rem;" [ngClass]="{'invalid':emailForm.controls['summary'].touched && !emailForm.controls['summary'].valid}"></textarea>
+            <label for="summary" style="transform: translateY(-140%);">Summary</label>
+            <div *ngIf="emailForm.controls['summary'].errors && emailForm.controls['summary'].touched" class="error">
+                <div [hidden]="!emailForm.controls['summary'].errors.required">Summary is required.</div>
+                <div [hidden]="!emailForm.controls['summary'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!emailForm.controls['summary'].errors.maxlength">Max 255 characters allowed.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <textarea formControlName="contents" id="contents" style="height:12rem;" [ngClass]="{'invalid':emailForm.controls['contents'].touched && !emailForm.controls['contents'].valid}"></textarea>
+            <label for="contents" style="transform: translateY(-140%);">Contents</label>
+            <div *ngIf="emailForm.controls['contents'].errors && emailForm.controls['contents'].touched" class="error">
+                <div [hidden]="!emailForm.controls['contents'].errors.required">Contents is required.</div>
+                <div [hidden]="!emailForm.controls['contents'].errors.minlength">Min 8 characters required.</div>
+                <div [hidden]="!emailForm.controls['contents'].errors.maxlength">Max 255 characters allowed.</div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!emailForm.valid">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light grey lighten-2" type="submit" name="action" [routerLink]="['/email/list']">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div [hidden]="error == ''">
+        <p class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+          <p class="md-body-1">{{ error }}</p>
+        </p>
+      </div>
+
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row" >
+    <h2 class="header red-text text-lighten-1" color="primary">
+      Update Practitioner
+    </h2>
+
+    <div class="row">
+      <form class="col s12" [formGroup]="createForm" #f="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="input-field col s12">
+            <input formControlName="firstName" id="firstName" type="text" [ngClass]="{'invalid':createForm.controls['firstName'].touched && !createForm.controls['firstName'].valid}"></input>
+            <label for="firstName" style="transform: translateY(-140%);">First Name</label>
+            <div *ngIf="createForm.controls['firstName'].errors && createForm.controls['firstName'].touched" class="error">
+                <div [hidden]="!createForm.controls['firstName'].errors.required">First Name is required.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.minlength">Min 2 characters required.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.maxlength">Max 30 characters allowed.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.validateFirstName">Please type valid First Name.</div>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <input formControlName="lastName" id="lastName" type="text" [ngClass]="{'invalid':createForm.controls['lastName'].touched && !createForm.controls['lastName'].valid}"></input>
+            <label for="lastName" style="transform: translateY(-140%);">Last Name</label>
+            <div *ngIf="createForm.controls['lastName'].errors && createForm.controls['lastName'].touched" class="error">
+                <div [hidden]="!createForm.controls['lastName'].errors.required">Last Name is required.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.minlength">Min 2 characters required.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.maxlength">Max 30 characters allowed.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.validateFirstName">Please type valid Last Name.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="phoneNum" id="phoneNum" type="text" [ngClass]="{'invalid':createForm.controls['phoneNum'].touched && !createForm.controls['phoneNum'].valid}"></input>
+            <label for="phoneNum" style="transform: translateY(-140%);">Contact</label>
+            <div *ngIf="createForm.controls['phoneNum'].errors && createForm.controls['phoneNum'].touched" class="error">
+                <div [hidden]="!createForm.controls['phoneNum'].errors.required">Contact Number is required.</div>
+                <div [hidden]="!createForm.controls['phoneNum'].errors.validatePhoneNum">Invalid Contact Number.</div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!createForm.valid">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light grey lighten-2" type="submit" name="action" [routerLink]="['/practitioner/list']">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div [hidden]="error == ''">
+        <p class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+          <p class="md-body-1">{{ error }}</p>
+        </p>
+      </div>
+
+    </div>
+</div>

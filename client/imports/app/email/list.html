@@ -1,0 +1,51 @@
+<section class="serach-bg">
+    <section class="search col s10">
+        <input id="search" type="text" #searchtext class="col s12" placeholder="Search here..." (keyup.enter)="search(searchtext.value)"
+            [(ngModel)]="searchString" />
+        <label class="tooltipped" for="search" (click)="search(searchtext.value)" data-position="top" data-delay="0" data-tooltip="Click to Search"><i class="material-icons">search</i></label>
+    </section>
+    <section class="download-btn">
+        <a class="waves-effect waves-light btn" [routerLink]="['/email/create']"><i class="zmdi zmdi-plus"></i>Add Email</a>
+    </section>
+</section>
+
+<pagination-controls *ngIf="itemsSize>0" class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>
+
+<div *ngIf="pageArr && pageArr.length==0">
+    No records found.
+</div>
+
+<div class="loading">
+    Loading...
+</div>
+
+<table class="bordered striped highlight responsive-table">
+    <thead>
+        <tr>
+            <th data-field="title">Title</th>
+            <th data-field="heading">Heading</th>
+            <th data-field="summary">Summary</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="" *ngFor="let email of emailArr" [attr.data-email-id]="email._id" [ngClass]="{'red accent-1': email.deleted, 'red lighten-4': email.active === false}"
+            [hidden]="email.deleted">
+            <td><a [routerLink]="['/email/view', email._id]">{{email.title}}</a></h2>
+            </td>
+            <td>{{email.heading}}</td>
+            <td>{{email.summary}}</td>
+            <td><a class="btn-floating waves-effect waves-light blue tooltipped" href="javascript:void(0);" [routerLink]="['/email/update', email._id]"
+                    data-position="top" data-delay="0" data-tooltip="Edit Email"><i class="material-icons">mode_edit</i></a>
+                <a *ngIf="email.active == undefined || email.active === true" class="btn-floating waves-effect waves-light red lighten-2 tooltipped"
+                    href="javascript:void(0);" (click)="deactivate(Email)" data-position="top" data-delay="0" data-tooltip="Deactivate"><i class="material-icons">check</i></a>
+                <a *ngIf="email.active === false" class="btn-floating waves-effect waves-light green lighten-2 tooltipped" href="javascript:void(0);"
+                    (click)="activate(email)" data-position="top" data-delay="0" data-tooltip="Activate"><i class="material-icons">check</i></a></li>
+                <a *ngIf="!email.deleted" class="btn-floating waves-effect waves-light red tooltipped" href="javascript:void(0);" (click)="deleteEmail(email)"
+                    data-position="top" data-delay="0" data-tooltip="Delete Email"><i class="material-icons">delete</i></a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<pagination-controls *ngIf="itemsSize>0" class="pagination" (pageChange)="onPageChanged($event)"></pagination-controls>

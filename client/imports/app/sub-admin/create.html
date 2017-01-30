@@ -1,0 +1,105 @@
+<div class="row" >
+    <h2 class="header red-text text-lighten-1" color="primary">
+      Create new Sub-admin
+    </h2>
+
+    <div class="row">
+      <form class="col s12" [formGroup]="createForm" #f="ngForm" (ngSubmit)="onSubmit()">
+
+        <div class="input-field col s12">
+            <input formControlName="firstName" id="firstName" type="text" [ngClass]="{'invalid':createForm.controls['firstName'].touched && !createForm.controls['firstName'].valid}"></input>
+            <label for="firstName" style="transform: translateY(-140%);">First Name</label>
+            <div *ngIf="createForm.controls['firstName'].errors && createForm.controls['firstName'].touched" class="error">
+                <div [hidden]="!createForm.controls['firstName'].errors.required">First Name is required.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.minlength">Min 2 characters required.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.maxlength">Max 30 characters allowed.</div>
+                <div [hidden]="!createForm.controls['firstName'].errors.validateFirstName">Please type valid First Name.</div>
+            </div>
+        </div>
+        <div class="input-field col s12">
+            <input formControlName="lastName" id="lastName" type="text" [ngClass]="{'invalid':createForm.controls['lastName'].touched && !createForm.controls['lastName'].valid}"></input>
+            <label for="lastName" style="transform: translateY(-140%);">Last Name</label>
+            <div *ngIf="createForm.controls['lastName'].errors && createForm.controls['lastName'].touched" class="error">
+                <div [hidden]="!createForm.controls['lastName'].errors.required">Last Name is required.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.minlength">Min 2 characters required.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.maxlength">Max 30 characters allowed.</div>
+                <div [hidden]="!createForm.controls['lastName'].errors.validateFirstName">Please type valid Last Name.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="email" id="email" type="email" [ngClass]="{'invalid':createForm.controls['email'].touched && !createForm.controls['email'].valid}"></input>
+            <label for="email" style="transform: translateY(-140%);">Email</label>
+            <div *ngIf="createForm.controls['email'].errors && createForm.controls['email'].touched" class="error">
+                <div [hidden]="!createForm.controls['email'].errors.required">Email is required.</div>
+                <div [hidden]="!createForm.controls['email'].errors.validateEmail">Invalid Email address.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="password" type="password" id="password" [ngClass]="{'invalid':createForm.controls['password'].touched && !createForm.controls['password'].valid}"></input> 
+            <label for="password">Password</label>
+            <div *ngIf="createForm.controls['password'].errors && createForm.controls['password'].touched" class="error">
+                <div [hidden]="!createForm.controls['password'].errors.required">Password is required.</div>
+                <div [hidden]="!createForm.controls['password'].errors.minlength">Minimum 8 characters required.</div>
+                <div [hidden]="!createForm.controls['password'].errors.validatePassword">At least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character required.</div>
+            </div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="repeatPassword" type="password" id="repeatPassword" [ngClass]="{'invalid':createForm.controls['repeatPassword'].touched && !createForm.controls['repeatPassword'].valid}"></input> 
+            <label for="repeatPassword">Repeat Password</label>
+            <div *ngIf="createForm.controls['repeatPassword'].errors && createForm.controls['repeatPassword'].touched" class="error">
+                <div [hidden]="!createForm.controls['repeatPassword'].errors.required">Repeat Password is required.</div>
+                <div [hidden]="!createForm.controls['repeatPassword'].errors.minlength">Minimum 8 characters required.</div>
+                <div [hidden]="!createForm.controls['repeatPassword'].errors.validatePassword">At least 1 Uppercase Alphabet, 1 Lowercase Alphabet, 1 Number and 1 Special Character required.</div>
+            </div>
+            <div class="error" [hidden]="!(createForm.controls['repeatPassword'].touched && createForm.hasError('password.mismatch'))">Type correct Repeat Password.</div>
+        </div>
+
+        <div class="input-field col s12">
+            <input formControlName="phoneNum" id="phoneNum" type="text" [ngClass]="{'invalid':createForm.controls['phoneNum'].touched && !createForm.controls['phoneNum'].valid}"></input>
+            <label for="phoneNum" style="transform: translateY(-140%);">Contact</label>
+            <div *ngIf="createForm.controls['phoneNum'].errors && createForm.controls['phoneNum'].touched" class="error">
+                <div [hidden]="!createForm.controls['phoneNum'].errors.required">Contact Number is required.</div>
+                <div [hidden]="!createForm.controls['phoneNum'].errors.validatePhoneNum">Invalid Contact Number.</div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="input-field col s12" formArrayName="roles">
+                <p *ngFor="let def of createForm.controls.roles.controls; let i = index">
+                <input type="checkbox" [attr.id]="'role'+i" formControlName="{{i}}" [attr.value]="rolesArray[i].value" [ngClass]="{'invalid':createForm.controls['roles'].touched && !createForm.controls['roles'].valid}"></input>
+                <label [attr.for]="'role'+i">{{rolesArray[i].label}}</label>
+                </p>
+                <label for="roles" class="active">Roles</label>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="input-field col s12">
+            <div *ngIf="createForm.controls['roles'].errors && createForm.controls['roles'].touched" class="error">
+                <div [hidden]="!createForm.controls['roles'].errors.required">Please select User Role.</div>
+            </div>
+            </div>
+        </div>
+
+        <div class="row">
+          <div class="col s12">
+            <button class="btn waves-effect waves-light" type="submit" name="action" [disabled]="!createForm.valid">Submit
+              <i class="material-icons right">send</i>
+            </button>
+            <button class="btn waves-effect waves-light grey lighten-2" type="submit" name="action" [routerLink]="['/sub-admin/list']">Cancel</button>
+          </div>
+        </div>
+
+      </form>
+
+      <div [hidden]="error == ''">
+        <p class="md-warn" layout="row" layout-fill layout-padding layout-margin>
+          <p class="md-body-1">{{ error }}</p>
+        </p>
+      </div>
+
+    </div>
+</div>

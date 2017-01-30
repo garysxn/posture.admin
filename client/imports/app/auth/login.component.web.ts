@@ -2,6 +2,7 @@ import {Component, OnInit, NgZone} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Meteor } from 'meteor/meteor';
+import {validateEmail, validatePhoneNum, validateFirstName} from "../../validators/common";
 
 import template from './login.component.web.html';
 
@@ -16,9 +17,8 @@ export class LoginComponent implements OnInit {
     constructor(private router: Router, private zone: NgZone, private formBuilder: FormBuilder) {}
   
     ngOnInit() {
-        var emailRegex = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
         this.loginForm = this.formBuilder.group({
-          email: ['', Validators.compose([Validators.pattern(emailRegex), Validators.required])],
+          email: ['', Validators.compose([Validators.required, validateEmail])],
           password: ['', Validators.required]
         });
     

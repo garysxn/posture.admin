@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Accounts } from 'meteor/accounts-base';
 import {MeteorComponent} from 'angular2-meteor';
+import {validateEmail, validatePhoneNum, validateFirstName} from "../../validators/common";
 
 import template from './signup.component.html';
 
@@ -19,12 +20,11 @@ export class SignupComponent extends MeteorComponent implements OnInit {
   }
 
     ngOnInit() {
-        var emailRegex = "[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})";
         this.signupForm = this.formBuilder.group({
-          email: ['', Validators.compose([Validators.pattern(emailRegex), Validators.required])],
-          password: ['', Validators.compose([Validators.required, Validators.minLength(6)]) ],
-          firstName: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]{2,30}")])],
-          lastName: ['', Validators.compose([Validators.required, Validators.pattern("[a-zA-Z ]{2,30}")])],
+          email: ['', Validators.compose([Validators.required, validateEmail])],
+          password: ['', Validators.compose([Validators.required, Validators.minLength(6)])],
+          firstName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30), validateFirstName])],
+          lastName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(30), validateFirstName])],
         });
   
         this.error = '';
@@ -40,14 +40,14 @@ export class SignupComponent extends MeteorComponent implements OnInit {
               lastName: this.signupForm.value.lastName
             }
           };
-          this.call("users.insert", userData, (err, res) => {
+          this.call("users.insert", userData, ['super-admin'], (err, res) => {
             if (err) {
               this.zone.run(() => {
                 this.error = err;
               });
             } else {
               console.log("new user-id:", res);
-              this.router.navigate(['/dashboard']);
+              this.router.navigate(['/login']);
             }
           });
         }

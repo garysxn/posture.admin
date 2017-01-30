@@ -3,12 +3,17 @@
     <img src="images/no-image-male.jpg" alt="" style="width:100px;" />
     <h2>{{user.profile.firstName}} {{user.profile.lastName}}</h2>
     </li>
-    
+
     <ul class="collapsible collapsible-accordion">
         <li class="bold"><a href="javascript:void(0);" [routerLink]="['/dashboard']" class="collapsible-header waves-effect waves-tea"><i class="zmdi zmdi-view-dashboard"></i> Dashboard</a></li>
-        <li class="bold"><a href="javascript:void(0);" class="collapsible-header waves-effect"><i class="zmdi zmdi-account"></i> My Account</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/sub-admin/list']" class="collapsible-header waves-effect waves-tea"><i class="zmdi zmdi-accounts"></i> Sub-admin</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/practitioner/list']" class="collapsible-header waves-effect waves-tea"><i class="zmdi zmdi-accounts"></i> Practitioner</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/page/list']" class="collapsible-header waves-effect waves-tea"><i class="zmdi zmdi-edit"></i> Static Page</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/package/list']" class="collapsible-header waves-effect waves-tea"><i class="material-icons">payment</i> Package</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/account/viewprofile']" class="collapsible-header waves-effect waves-tea"><i class="material-icons">perm_identity</i> My Account</a></li>
+        <li class="bold"><a href="javascript:void(0);" [routerLink]="['/email/list']" class="collapsible-header waves-effect waves-tea"><i class="material-icons">email</i>Emails</a></li>
     </ul>
-    
+
     <li class="bold"><a href="javascript:void(0);" class="waves-effect" [hidden]="!user" (click)="logout()">
         <i class="zmdi zmdi-lock"></i> Logout</a>
     </li>
