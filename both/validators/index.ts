@@ -3,7 +3,7 @@ export function isValidEmail (address) {
 };
 
 export function isValidFirstName (value) {
-    return /^[a-zA-Z\.]{2,}[a-zA-Z ]{0,30}$/.test(value);
+    return /^\w(\w|\s|['.])*$/.test(value);
 };
 
 export function isValidPhoneNum (value) {

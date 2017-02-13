@@ -6,7 +6,7 @@ export const validateEmail = function(c: FormControl) {
     return null;  // don't validate empty values to allow optional controls
   }
 
-  let EMAIL_REGEXP = /\S+@\S+\.\S+/;
+  let EMAIL_REGEXP = /\S+@\S+\.\S+/; 
 
   return EMAIL_REGEXP.test(c.value) ? null : {
     validateEmail: {
@@ -34,7 +34,7 @@ export const validateFirstName = function(c: FormControl) {
     return null;  // don't validate empty values to allow optional controls
   }
 
-  let REGEXP = /^[a-zA-Z\.]{2,}[a-zA-Z ]{0,30}$/;
+  let REGEXP =/^\w(\w|\s|['.])*$/;
   
   return REGEXP.test(c.value) ? null : {
     validateFirstName: {
