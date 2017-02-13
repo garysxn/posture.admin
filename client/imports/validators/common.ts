@@ -6,7 +6,7 @@ export const validateEmail = function(c: FormControl) {
     return null;  // don't validate empty values to allow optional controls
   }
 
-  let EMAIL_REGEXP = /^[a-z0-9!#$%&'*+\/=?^_`{|}~.-]+@[a-z0-9]([a-z0-9-]*[a-z0-9])?(\.[a-z0-9]([a-z0-9-]*[a-z0-9])?)*$/i;
+  let EMAIL_REGEXP = /\S+@\S+\.\S+/;
 
   return EMAIL_REGEXP.test(c.value) ? null : {
     validateEmail: {

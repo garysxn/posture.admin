@@ -14,6 +14,8 @@
                 <div [hidden]="!emailForm.controls['title'].errors.required">Title is required.</div>
                 <div [hidden]="!emailForm.controls['title'].errors.minlength">Min 8 characters required.</div>
                 <div [hidden]="!emailForm.controls['title'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!emailForm.controls['title'].errors.validateFirstName">Please type valid title.</div>
+
             </div>
         </div>
         <div class="input-field col s12">
@@ -23,6 +25,8 @@
                 <div [hidden]="!emailForm.controls['heading'].errors.required">Heading is required.</div>
                 <div [hidden]="!emailForm.controls['heading'].errors.minlength">Min 8 characters required.</div>
                 <div [hidden]="!emailForm.controls['heading'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!emailForm.controls['heading'].errors.validateFirstName">Please type valid heading.</div>
+
             </div>
         </div>
 

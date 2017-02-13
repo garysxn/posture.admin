@@ -39,6 +39,7 @@ export class ListSubadminComponent extends MeteorComponent implements OnInit {
     itemsSize: number = -1;
     searchSubject: Subject<string> = new Subject<string>();
     searchString: string = "";
+    timer:any;
 
     constructor(private router: Router, 
         private route: ActivatedRoute,
@@ -152,11 +153,15 @@ export class ListSubadminComponent extends MeteorComponent implements OnInit {
     }
 
     search(value: string): void {
+        clearTimeout(this.timer);
+         this.timer = setTimeout(() => {
         this.searchSubject.next(value);
+         },500);
+        
     }
-     
-     clearsearch(value: string): void{
-        this.searchSubject.next(value);
+    /* function for clearing search */
+    clearsearch(value: string): void{    
+          clearTimeout(this.timer);
     }
 
     onPageChanged(page: number): void {

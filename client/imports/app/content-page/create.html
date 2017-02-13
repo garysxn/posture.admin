@@ -14,6 +14,7 @@
                 <div [hidden]="!createForm.controls['title'].errors.required">Title is required.</div>
                 <div [hidden]="!createForm.controls['title'].errors.minlength">Min 5 characters required.</div>
                 <div [hidden]="!createForm.controls['title'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!createForm.controls['title'].errors.validateFirstName">Valid title is required.</div>
             </div>
         </div>
         <div class="input-field col s12">
@@ -23,6 +24,7 @@
                 <div [hidden]="!createForm.controls['heading'].errors.required">Heading is required.</div>
                 <div [hidden]="!createForm.controls['heading'].errors.minlength">Min 5 characters required.</div>
                 <div [hidden]="!createForm.controls['heading'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!createForm.controls['heading'].errors.validateFirstName">Valid heading is required.</div>
             </div>
         </div>
 

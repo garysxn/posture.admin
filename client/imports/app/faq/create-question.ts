@@ -6,7 +6,7 @@ import { MeteorComponent } from 'angular2-meteor';
 import { Subscription } from "rxjs";
 import { FAQCategory } from "../../../../both/models/faq.model";
 import { showAlert } from "../shared/show-alert";
-import { validateSlug } from "../../validators/common";
+import { validateSlug,validateFirstName } from "../../validators/common";
 import { Roles } from 'meteor/alanning:roles';
 
 import template from "./create-question.html";
@@ -82,7 +82,7 @@ export class CreateFAQComponent extends MeteorComponent implements OnInit, After
 
         this.createForm = this.formBuilder.group({
             categoryId: ['', Validators.compose([Validators.required])],
-            question: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255)])],
+            question: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255),validateFirstName])],
             answer: ['', Validators.compose([Validators.required, Validators.minLength(8)])],
         });
 

@@ -39,6 +39,7 @@ export class ListPageComponent extends MeteorComponent implements OnInit, OnDest
     itemsSize: number = -1;
     searchSubject: Subject<string> = new Subject<string>();
     searchString: string = "";
+    timer: any;
 
     constructor(private router: Router, 
         private route: ActivatedRoute,
@@ -152,14 +153,16 @@ export class ListPageComponent extends MeteorComponent implements OnInit, OnDest
     }
 
     search(value: string): void {
+        clearTimeout(this.timer);
+         this.timer = setTimeout(() => {
         this.searchSubject.next(value);
+         },500);
         
     }
     /* function for clearing search */
     clearsearch(value: string): void{    
-        this.searchSubject.next(value);
+          clearTimeout(this.timer);
     }
-
 
     onPageChanged(page: number): void {
         this.curPage.next(page);

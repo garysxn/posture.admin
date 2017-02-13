@@ -13,7 +13,7 @@ Meteor.methods({
             
         });
         let inactiveUsers = Meteor.call("users.count", { active: false, "roles": "practitioner" });
-
+        
         return {
             "packages": {
                 "active": activePackages,

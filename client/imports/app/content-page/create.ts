@@ -6,7 +6,7 @@ import { MeteorComponent } from 'angular2-meteor';
 import { Subscription } from "rxjs";
 import { Page } from "../../../../both/models/page.model";
 import {showAlert} from "../shared/show-alert";
-import {validateSlug} from "../../validators/common";
+import {validateSlug,validateFirstName} from "../../validators/common";
 import { Roles } from 'meteor/alanning:roles';
 
 import template from "./create.html";
@@ -62,8 +62,8 @@ export class CreatePageComponent extends MeteorComponent implements OnInit, OnDe
       });
 
     this.createForm = this.formBuilder.group({
-      title: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255)])],
-      heading: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255)])],
+      title: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255),validateFirstName])],
+      heading: ['', Validators.compose([Validators.required, Validators.minLength(5), Validators.maxLength(255),validateFirstName])],
       summary: ['', Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(255)])],
       slug: [''],
       contents: ['', Validators.compose([Validators.required])],

@@ -38,6 +38,7 @@ export class ListEmailComponent extends MeteorComponent implements OnInit, OnDes
     itemsSize: number = -1;
     searchSubject: Subject<string> = new Subject<string>();
     searchString: string = "";
+    timer:any;
 
     constructor(private router: Router, 
         private route: ActivatedRoute,
@@ -159,11 +160,15 @@ export class ListEmailComponent extends MeteorComponent implements OnInit, OnDes
     }
 
     search(value: string): void {
+        clearTimeout(this.timer);
+         this.timer = setTimeout(() => {
         this.searchSubject.next(value);
+         },500);
+        
     }
-    
-    clearsearch(value: string): void{
-        this.searchSubject.next(value);
+    /* function for clearing search */
+    clearsearch(value: string): void{    
+          clearTimeout(this.timer);
     }
 
 

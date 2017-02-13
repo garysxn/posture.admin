@@ -29,6 +29,7 @@
                 <div [hidden]="!createForm.controls['question'].errors.required">Question is required.</div>
                 <div [hidden]="!createForm.controls['question'].errors.minlength">Min 5 characters required.</div>
                 <div [hidden]="!createForm.controls['question'].errors.maxlength">Max 255 characters allowed.</div>
+                <div [hidden]="!createForm.controls['question'].errors.validateFirstName">Please type valid question.</div>
             </div>
         </div>
      

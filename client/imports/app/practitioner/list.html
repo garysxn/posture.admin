@@ -7,7 +7,7 @@
         <a class="" (click)="clearsearch(searchString='')"><i class="material-icons">clear</i></a>
     </section>
     <section class="search col s9">
-        <input id="search" type="text" #searchtext class="col s12" placeholder="Search here..." (keyup.enter)="search(searchtext.value)" [(ngModel)]="searchString" />
+        <input id="search" type="text" #searchtext class="col s12" (keydown)="clearsearch()" placeholder="Search here..." (keyup)="search(searchtext.value)" [(ngModel)]="searchString" />
         <label class="tooltipped" for="search" (click)="search(searchtext.value)" data-position="top" data-delay="0" data-tooltip="Click to Search"><i class="material-icons">search</i></label>
     </section>
     <section class="download-btn col s2">
@@ -35,7 +35,7 @@
             <h2 class="pateint-name"><a [routerLink]="['/practitioner/view', user._id]">{{user.profile.firstName}} {{user.profile.lastName}}</a></h2>
             <ul class="pateint-deatil">
                 <li><i class="zmdi zmdi-email tooltipped" data-position="top" data-delay="0" data-tooltip="Email"></i> {{user.emails[0].address}}</li>
-                <li><i class="zmdi zmdi-phone tooltipped" data-position="top" data-delay="0" data-tooltip="Contact"></i> {{user.profile.contact}}</li>
+                <li *ngIf="user.profile.contact"><i class="zmdi zmdi-phone tooltipped" data-position="top" data-delay="0" data-tooltip="Contact"></i> {{user.profile.contact}}</li>
             </ul>
         </section>
         <section class="col s4 detail-btn">

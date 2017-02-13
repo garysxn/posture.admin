@@ -42,6 +42,7 @@ export class ListFAQCategoryComponent extends MeteorComponent implements OnInit,
     searchSubject: Subject<string> = new Subject<string>();
     searchString: string = "";
     isSetAccordian: boolean = false;
+    timer:any;
 
     constructor(private router: Router, 
         private route: ActivatedRoute,
@@ -174,15 +175,18 @@ export class ListFAQCategoryComponent extends MeteorComponent implements OnInit,
         return retArr;
     }
 
-    search(value: string): void {
+  search(value: string): void {
+        clearTimeout(this.timer);
+         this.timer = setTimeout(() => {
         this.searchSubject.next(value);
-        this.isSetAccordian = false;
+         },500);
+        this.isSetAccordian=false;
     }
-
     /* function for clearing search */
     clearsearch(value: string): void{    
-        this.searchSubject.next(value);
-        this.isSetAccordian = false;
+        clearTimeout(this.timer);
+        this.isSetAccordian=false;
+
     }
 
     changeSortOrder(nameOrder: string): void {

@@ -6,8 +6,8 @@
     <div class="row">
       <form class="col s12" [formGroup]="createForm" #f="ngForm" (ngSubmit)="onSubmit()">
 
-        <div class="input-field col s12">
-            <input formControlName="firstName" id="firstName" type="text" [ngClass]="{'invalid':createForm.controls['firstName'].touched && !createForm.controls['firstName'].valid}"></input>
+        <div class="input-field col s12 name">
+            <input formControlName="firstName" id="firstName" type="text" [ngClass]="{'invalid':createForm.controls['firstName'].touched && !createForm.controls['firstName'].valid}" style="text-transform: capitalize" ></input>
             <label for="firstName" style="transform: translateY(-140%);">First Name</label>
             <div *ngIf="createForm.controls['firstName'].errors && createForm.controls['firstName'].touched" class="error">
                 <div [hidden]="!createForm.controls['firstName'].errors.required">First Name is required.</div>
